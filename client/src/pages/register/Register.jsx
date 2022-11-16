@@ -1,4 +1,7 @@
+import axios from 'axios';
 import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import "./register.css"
 
 const Register = () => {
@@ -10,11 +13,23 @@ const Register = () => {
     const passwordRef = useRef();
     const usernameRef = useRef();
 
-    const handleSubmit = (e)=>{
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         setEmail(emailRef.current.value);
         setPassword(passwordRef.current.value);
         setUsername(usernameRef.current.value);
+
+        try{
+            await axios.post("auth/register", { email, username, password });
+            navigate("/login",
+            {
+                state: {
+                    registeredEmail:{email}, registeredPassword:{password}
+                }
+            });
+        }catch(err){}
 
     }
         
@@ -29,9 +44,7 @@ const Register = () => {
                 <button>Sign Up</button>
             </form>
         </div>
-        {email && <div>{email}</div>}
-        {password && <div>{password}</div>}
-        {username && <div>{username}</div>}
+        
     </div>
   )
 }
