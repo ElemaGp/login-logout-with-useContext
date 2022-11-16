@@ -38,9 +38,9 @@ const Register = () => {
     <div className='register'>
         <div className='registerWrapper'>
             <form onSubmit={handleSubmit}>
-                <input type="email" placeholder='email' ref={emailRef} />
-                <input type="password" placeholder='password' ref={passwordRef} />
-                <input type="username" placeholder='username' ref={usernameRef} />
+                <input type="email" placeholder='email' required ref={emailRef} />
+                <input type="password" placeholder='password' required ref={passwordRef} />
+                <input type="username" placeholder='username' required ref={usernameRef} />
                 <button>Sign Up</button>
             </form>
         </div>

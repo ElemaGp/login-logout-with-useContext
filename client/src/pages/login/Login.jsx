@@ -8,8 +8,8 @@ import { Link, useLocation } from "react-router-dom";
 const Login = () => {
 
   const { state } = useLocation();
-  const [email, setEmail] = useState(state.registeredEmail.email);
-  const [password, setPassword] = useState(state.registeredPassword.password);
+  const [email, setEmail] = useState(state ? state.registeredEmail.email : "");
+  const [password, setPassword] = useState(state ? state.registeredPassword.password : "");
 
   const {dispatch} = useContext(AuthContext);
 
@@ -27,8 +27,8 @@ const Login = () => {
         <div className="loginWrapper">
           <h2>Log in</h2>
           <form onSubmit={handleLogin}>
-            <input type="email" placeholder="email" value={email} onChange= {(e)=>setEmail(e.target.value)} />
-            <input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            <input type="email" placeholder="email" required value={email} onChange= {(e)=>setEmail(e.target.value)} />
+            <input type="password" placeholder="password" required value={password} onChange={(e)=>setPassword(e.target.value)} />
             <button>Log in</button>
           </form>
           <Link to="/register" style={{display: "block"}}>Register</Link>
